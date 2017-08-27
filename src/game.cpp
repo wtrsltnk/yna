@@ -11,7 +11,7 @@ Game::Game()
     : _graphicsDevice(nullptr),
       _services(nullptr),
       _components(nullptr),
-      Window([this] () -> yna::framework::GameWindow* { return (Platform != nullptr ? Platform.get()->Window : nullptr); }),
+      Window(_window),
       GraphicsDevice(_graphicsDevice),
       Components(_components),
       Services(_services)
@@ -22,8 +22,6 @@ Game::Game()
     this->_services = new GameServiceContainer();
     this->_components = new GameComponentCollection();
     //this->_content = new ContentManager(_services);
-
-    Platform = GamePlatform::PlatformCreate(this);
 }
 
 Game::~Game()
@@ -44,7 +42,7 @@ void Game::Run()
 
     BeginRun();
 
-    Platform->RunLoop();
+    _platform->RunLoop();
 
     EndRun();
 
@@ -70,7 +68,7 @@ void Game::Tick()
         _lastUpdate = now;
     }
 
-    if (Platform.get()->BeforeDraw() && BeginDraw())
+    if (_platform->BeforeDraw() && BeginDraw())
     {
         auto drawTime = GameTime(lastDrawCount, totalCount);
 
@@ -78,7 +76,7 @@ void Game::Tick()
 
         EndDraw();
 
-        Platform.get()->AfterDraw();
+        _platform->AfterDraw();
     }
 
     _lastDraw = now;
@@ -86,5 +84,5 @@ void Game::Tick()
 
 void Game::Exit()
 {
-    Platform->Exit();
+    _platform->Exit();
 }

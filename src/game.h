@@ -3,6 +3,8 @@
 
 #include "platform.h"
 #include "property.h"
+#include "graphics/graphicsdevice.h"
+
 #include <chrono>
 
 namespace yna
@@ -13,21 +15,24 @@ namespace framework
 
 class Game
 {
+    friend class GamePlatform;
+
     std::chrono::high_resolution_clock::time_point _gameStart;
     std::chrono::high_resolution_clock::time_point _lastUpdate;
     std::chrono::high_resolution_clock::time_point _lastDraw;
     double _targetElapsedTime;
-    class GraphicsDevice* _graphicsDevice;
+    class GameWindow* _window;
+    graphics::GraphicsDevice* _graphicsDevice;
     class GameServiceContainer* _services;
     class GameComponentCollection* _components;
-    property<class GamePlatform*> Platform;
+    class GamePlatform* _platform;
 
 public:
     Game();
     virtual ~Game();
 
-    getf_property<class GameWindow*> Window;
-    get_property<class GraphicsDevice*> GraphicsDevice;
+    get_property<class GameWindow*> Window;
+    get_property<graphics::GraphicsDevice*> GraphicsDevice;
     get_property<class GameServiceContainer*> Services;
     get_property<class GameComponentCollection*> Components;
 

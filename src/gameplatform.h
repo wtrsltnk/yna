@@ -2,6 +2,7 @@
 #define GAMEPLATFORM_H
 
 #include "property.h"
+#include "graphics/graphicsdevice.h"
 
 namespace yna
 {
@@ -11,12 +12,16 @@ namespace framework
 
 class GamePlatform
 {
+protected:
+    class Game* _game;
+
+    void SetGameWindow(class GameWindow* gameWindow);
+    void SetGraphicsDevice(graphics::GraphicsDevice* graphicsDevice);
+
 public:
-    GamePlatform();
+    GamePlatform(class Game* game);
 
     static GamePlatform* PlatformCreate(class Game* game);
-
-    property<class GameWindow*> Window;
 
     virtual bool BeforeDraw() = 0;
     virtual void AfterDraw() = 0;

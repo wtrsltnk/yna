@@ -1,10 +1,15 @@
 
-add_subdirectory(content)
-add_subdirectory(graphics)
-
 find_package(OpenGL REQUIRED)
 
 add_library(yna.framework
+    boundingbox.cpp
+    boundingbox.h
+    boundingfrustum.cpp
+    boundingfrustum.h
+    boundingsphere.cpp
+    boundingsphere.h
+    color.cpp
+    color.h
     game.cpp
     game.h
     gamecomponent.cpp
@@ -21,8 +26,32 @@ add_library(yna.framework
     gamewindow.h
     graphicsdevicemanager.cpp
     graphicsdevicemanager.h
+    matrix.cpp
+    matrix.h
+    plane.cpp
+    plane.h
     platform.h
+    point.cpp
+    point.h
     property.h
+    quaternion.cpp
+    quaternion.h
+    rectangle.cpp
+    rectangle.h
+    vector2.cpp
+    vector2.h
+    vector3.cpp
+    vector3.h
+    vector4.cpp
+    vector4.h
+    containmenttype.h
+    planeintersectiontype.h
+    content/contentmanager.cpp
+    content/contentmanager.h
+    graphics/graphicsdevice.cpp
+    graphics/graphicsdevice.h
+    graphics/graphicsresource.cpp
+    graphics/graphicsresource.h
     )
 
 if (WIN32)

@@ -1,37 +1,35 @@
 #include <iostream>
 #include <game.h>
 #include <gametime.h>
+#include <graphicsdevicemanager.h>
 #include <thread>
 #include <random>
-#include <GL/gl.h>
 
 class ExampleGame : public yna::framework::Game
 {
 public:
+    yna::framework::GraphicsDeviceManager* _graphics;
     ExampleGame()
     {
-        std::cout << "ExampleGame::ExampleGame()\n";
+        _graphics = new yna::framework::GraphicsDeviceManager(this);
     }
 
     virtual void Update(const yna::framework::GameTime& gameTime)
     {
-        std::cout << "Update\n"
-                  << gameTime.TotalGameTime << "\n"
-                  << gameTime.ElapsedGameTime << std::endl;
+//        std::cout << "Update\n"
+//                  << gameTime.TotalGameTime << "\n"
+//                  << gameTime.ElapsedGameTime << std::endl;
         auto ms = 10 + (std::rand() % 10);
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
     }
 
     virtual void Draw(const yna::framework::GameTime& gameTime)
     {
-        std::cout << "Draw\n"
-                  << gameTime.TotalGameTime << "\n"
-                  << gameTime.ElapsedGameTime << std::endl;
+//        std::cout << "Draw\n"
+//                  << gameTime.TotalGameTime << "\n"
+//                  << gameTime.ElapsedGameTime << std::endl;
         auto ms = 10 + (std::rand() % 10);
         std::this_thread::sleep_for(std::chrono::milliseconds(ms));
-
-        glClearColor(0.3f, 0.6f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
     }
 };
 

@@ -3,6 +3,4 @@
 using namespace yna::framework::graphics;
 
 GraphicsDevice::GraphicsDevice()
-{
-
-}
+{ }

@@ -4,6 +4,8 @@ add_library(yna.framework.graphics
     graphicsdevice.h
     graphicscontext.cpp
     graphicscontext.h
+    graphicsresource.cpp
+    graphicsresource.h
     )
 
 target_compile_features(yna.framework.graphics

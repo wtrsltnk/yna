@@ -47,15 +47,27 @@ public:
 #include <functional>
 
 template<class TProperty>
-class getf_property
+class getref_property
 {
     std::function<TProperty const&()> _get;
 public:
-    getf_property(std::function<TProperty const&()> get) : _get(get) { }
+    getref_property(std::function<TProperty const&()> get) : _get(get) { }
 
     operator TProperty const & () { return get(); }
 
     TProperty const& get() const { return get(); }
+};
+
+template<class TProperty>
+class getcopy_property
+{
+    std::function<TProperty()> _get;
+public:
+    getcopy_property(std::function<TProperty()> get) : _get(get) { }
+
+    operator TProperty () { return get(); }
+
+    TProperty get() const { return get(); }
 };
 
 #endif // PROPERTY_H
