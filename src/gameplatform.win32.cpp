@@ -97,6 +97,18 @@ void Win32OpenGLGraphicsDevice::Present()
     SwapBuffers(this->deviceConext);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 class Win32Window : public GameWindow
 {
     Game* _game;
@@ -234,6 +246,20 @@ bool Win32Window::IsOpen()
 {
     return IsWindow(_handle.window);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Win32Platform : public GamePlatform
 {
