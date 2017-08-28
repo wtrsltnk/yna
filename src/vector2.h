@@ -9,13 +9,11 @@ namespace yna
 namespace framework
 {
 
-class Vector2
+struct Vector2
 {
-public:
     Vector2();
     Vector2(float v);
     Vector2(float x, float y);
-    virtual ~Vector2();
 
     // Gets or sets the x-component of the vector.
     float X;

@@ -13,12 +13,10 @@ namespace yna
 namespace framework
 {
 
-class BoundingSphere
+struct BoundingSphere
 {
-public:
     BoundingSphere();
     BoundingSphere(const Vector3& center, float radius);
-    virtual ~BoundingSphere();
 
     // The center point of the sphere.
     Vector3 Center;

@@ -9,13 +9,11 @@ namespace yna
 namespace framework
 {
 
-class Vector4
+struct Vector4
 {
-public:
     Vector4();
     Vector4(float v);
     Vector4(float x, float y, float z, float w);
-    virtual ~Vector4();
 
     // Gets or sets the x-component of the vector.
     float X;

@@ -7,11 +7,9 @@ namespace yna
 namespace framework
 {
 
-class Plane
+struct Plane
 {
-public:
     Plane();
-    virtual ~Plane();
 };
 
 }

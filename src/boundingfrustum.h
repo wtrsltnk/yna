@@ -14,6 +14,7 @@ namespace yna
 
 namespace framework
 {
+
 class BoundingFrustum
 {
 public:

@@ -7,11 +7,9 @@ namespace yna
 namespace framework
 {
 
-class Matrix
+struct Matrix
 {
-public:
     Matrix();
-    virtual ~Matrix();
 };
 
 }

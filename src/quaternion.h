@@ -7,11 +7,9 @@ namespace yna
 namespace framework
 {
 
-class Quaternion
+struct Quaternion
 {
-public:
     Quaternion();
-    virtual ~Quaternion();
 };
 
 }

@@ -7,11 +7,9 @@ namespace yna
 namespace framework
 {
 
-class Point
+struct Point
 {
-public:
     Point();
-    virtual ~Point();
 
 };
 

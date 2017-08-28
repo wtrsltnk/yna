@@ -14,12 +14,10 @@ namespace yna
 namespace framework
 {
 
-class BoundingBox
+struct BoundingBox
 {
-public:
     BoundingBox();
     BoundingBox(const Vector3& min, const Vector3& max);
-    virtual ~BoundingBox();
 
     // The maximum point the BoundingBox contains.
     Vector3 Max;
