@@ -8,6 +8,7 @@ add_executable(yna.tests
     test-vector3.cpp
     test-vector4.cpp
     test-quaternion.cpp
+    test-rectangle.cpp
     )
 
 target_include_directories(yna.tests

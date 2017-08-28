@@ -24,24 +24,24 @@ struct BoundingSphere
     float Radius;
 
     // Checks whether the current BoundingFrustum contains the specified BoundingBox.
-    ContainmentType Contains(const class BoundingBox& bb);
+    ContainmentType Contains(const class BoundingBox& bb) const;
     // Checks whether the current BoundingFrustum contains the specified BoundingFrustum.
-    ContainmentType Contains(const class BoundingFrustum& bf);
+    ContainmentType Contains(const class BoundingFrustum& bf) const;
     // Checks whether the current BoundingFrustum contains the specified BoundingSphere.
-    ContainmentType Contains(const BoundingSphere& bs);
+    ContainmentType Contains(const BoundingSphere& bs) const;
     // Checks whether the current BoundingFrustum contains the specified point.
-    ContainmentType Contains(const Vector3& v);
+    ContainmentType Contains(const Vector3& v) const;
 
     // Checks whether the current BoundingBox intersects another bool
-    bool Intersects(const class BoundingBox& bb);
+    bool Intersects(const class BoundingBox& bb) const;
     // Checks whether the current BoundingBox intersects a BoundingFrustum.
-    bool Intersects(const class BoundingFrustum& bf);
+    bool Intersects(const class BoundingFrustum& bf) const;
     // Checks whether the current BoundingBox intersects a BoundingSphere.
-    bool Intersects(const BoundingSphere& bs);
+    bool Intersects(const BoundingSphere& bs) const;
     // Checks whether the current BoundingBox intersects a Plane.
-    PlaneIntersectionType Intersects(const class Plane& plane);
+    PlaneIntersectionType Intersects(const class Plane& plane) const;
     // Checks whether the current BoundingBox intersects a Ray.
-    std::vector<float> Intersects(const class Ray& ray);
+    std::vector<float> Intersects(const class Ray& ray) const;
 };
 
 }

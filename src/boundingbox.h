@@ -25,24 +25,24 @@ struct BoundingBox
     Vector3 Min;
 
     // Tests whether the BoundingBox contains another BoundingBox.
-    ContainmentType Contains(const BoundingBox& bb);
+    ContainmentType Contains(const BoundingBox& bb) const;
     // Tests whether the BoundingBox contains a BoundingFrustum.
-    ContainmentType Contains(const class BoundingFrustum& bf);
+    ContainmentType Contains(const class BoundingFrustum& bf) const;
     // Tests whether the BoundingBox contains a BoundingSphere.
-    ContainmentType Contains(const class BoundingSphere& bs);
+    ContainmentType Contains(const class BoundingSphere& bs) const;
     // Tests whether the BoundingBox contains a point.
-    ContainmentType Contains(const Vector3& v);
+    ContainmentType Contains(const Vector3& v) const;
 
     // Checks whether the current BoundingBox intersects another bool
-    bool Intersects(const BoundingBox& bb);
+    bool Intersects(const BoundingBox& bb) const;
     // Checks whether the current BoundingBox intersects a BoundingFrustum.
-    bool Intersects(const class BoundingFrustum& bf);
+    bool Intersects(const class BoundingFrustum& bf) const;
     // Checks whether the current BoundingBox intersects a BoundingSphere.
-    bool Intersects(const class BoundingSphere& bs);
+    bool Intersects(const class BoundingSphere& bs) const;
     // Checks whether the current BoundingBox intersects a Plane.
-    PlaneIntersectionType Intersects(const class Plane& plane);
+    PlaneIntersectionType Intersects(const class Plane& plane) const;
     // Checks whether the current BoundingBox intersects a Ray.
-    std::vector<float> Intersects(const class Ray& ray);
+    std::vector<float> Intersects(const class Ray& ray) const;
 
     // Creates the smallest BoundingBox that will contain a group of points.
     static BoundingBox CreateFromPoints(const std::vector<Vector3>& points);
