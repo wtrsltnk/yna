@@ -1,12 +1,13 @@
 
 add_executable(yna.tests
-    catch-main.cpp
-    catch.hpp
+    doctest-main.cpp
+    doctest.h
     test-gamewindow.cpp
     test-property.cpp
     test-vector2.cpp
     test-vector3.cpp
     test-vector4.cpp
+    test-quaternion.cpp
     )
 
 target_include_directories(yna.tests

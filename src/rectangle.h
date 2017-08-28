@@ -9,9 +9,8 @@ namespace yna
 namespace framework
 {
 
-class Rectangle
+struct Rectangle
 {
-public:
     Rectangle();
     Rectangle(int x, int y, int width, int height);
 
