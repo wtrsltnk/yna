@@ -1,9 +1,10 @@
 #ifndef GAMESERVICECONTAINER_H
 #define GAMESERVICECONTAINER_H
 
+#include "iserviceprovider.h"
+
 #include <map>
 #include <string>
-#include <algorithm>
 
 namespace yna
 {
@@ -11,15 +12,7 @@ namespace yna
 namespace framework
 {
 
-class IGameService
-{
-public:
-    virtual ~IGameService() { }
-
-    virtual const std::string& Name() const = 0;
-};
-
-class GameServiceContainer
+class GameServiceContainer : public IServiceProvider
 {
     std::map<std::string, IGameService*> _services;
 public:
@@ -28,14 +21,7 @@ public:
 
     void AddService(IGameService* service);
     void RemoveService(const std::string& name);
-    template<class T> T* GetService(const std::string& name)
-    {
-        auto found = std::find_if(_services.begin(), _services.end, [name] (IGameService* service) -> bool { return service->Name() == name; });
-
-        if (found != _services.end()) return (T*)(*found);
-
-        return nullptr;
-    }
+    IGameService* GetService(const std::string& name);
 };
 
 }

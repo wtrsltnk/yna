@@ -4,6 +4,7 @@
 #include "platform.h"
 #include "property.h"
 #include "graphics/graphicsdevice.h"
+#include "content/contentmanager.h"
 
 #include <chrono>
 
@@ -26,15 +27,17 @@ class Game
     class GameServiceContainer* _services;
     class GameComponentCollection* _components;
     class GamePlatform* _platform;
+    content::ContentManager* _content;
 
 public:
     Game();
     virtual ~Game();
 
-    get_property<class GameWindow*> Window;
+    get_property<content::ContentManager*> Content;
     get_property<graphics::GraphicsDevice*> GraphicsDevice;
     get_property<class GameServiceContainer*> Services;
     get_property<class GameComponentCollection*> Components;
+    get_property<class GameWindow*> Window;
 
     // Gets or sets a value indicating whether to use fixed time steps.
     property<bool> IsFixedTimeStep;

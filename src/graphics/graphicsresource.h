@@ -1,6 +1,8 @@
 #ifndef GRAPHICSRESOURCE_H
 #define GRAPHICSRESOURCE_H
 
+#include "../property.h"
+
 namespace yna
 {
 
@@ -12,8 +14,14 @@ namespace graphics
 
 class GraphicsResource
 {
-public:
+protected:
+    class GraphicsDevice* _graphicsDevice;
     GraphicsResource();
+
+public:
+    get_property<class GraphicsDevice*> GraphicsDevice;
+    property<std::string> Name;
+    property<std::string> Tag;
 };
 
 }

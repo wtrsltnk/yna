@@ -14,14 +14,15 @@ Game::Game()
       Window(_window),
       GraphicsDevice(_graphicsDevice),
       Components(_components),
-      Services(_services)
+      Services(_services),
+      Content(_content)
 {
     this->IsFixedTimeStep = false;
     this->TargetElapsedTime = 0.0;
 
     this->_services = new GameServiceContainer();
     this->_components = new GameComponentCollection();
-    //this->_content = new ContentManager(_services);
+    this->_content = new content::ContentManager(_services);
 }
 
 Game::~Game()

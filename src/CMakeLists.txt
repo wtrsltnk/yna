@@ -48,10 +48,29 @@ add_library(yna.framework
     planeintersectiontype.h
     content/contentmanager.cpp
     content/contentmanager.h
+    content/contentreader.cpp
+    content/contentreader.h
+    content/pipline/graphics/texturecontent.cpp
+    content/pipline/graphics/texturecontent.h
+    content/pipline/textureimporter.cpp
+    content/pipline/textureimporter.h
+    content/pipline/contentitem.cpp
+    content/pipline/contentitem.h
+    graphics/effect.cpp
+    graphics/effect.h
+    graphics/igraphicsdeviceservice.h
     graphics/graphicsdevice.cpp
     graphics/graphicsdevice.h
     graphics/graphicsresource.cpp
     graphics/graphicsresource.h
+    graphics/model.cpp
+    graphics/model.h
+    graphics/spritefont.cpp
+    graphics/spritefont.h
+    graphics/texture.cpp
+    graphics/texture.h
+    graphics/texture2D.cpp
+    graphics/texture2D.h
     )
 
 if (WIN32)
