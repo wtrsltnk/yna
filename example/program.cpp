@@ -5,13 +5,18 @@
 #include <thread>
 #include <random>
 
+#include <graphics/texture2d.h>
+
 class ExampleGame : public yna::framework::Game
 {
 public:
     yna::framework::GraphicsDeviceManager* _graphics;
+
     ExampleGame()
     {
         _graphics = new yna::framework::GraphicsDeviceManager(this);
+
+        auto texture = Content->LoadTexture2D("test");
     }
 
     virtual void Update(const yna::framework::GameTime& gameTime)

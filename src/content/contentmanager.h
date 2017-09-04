@@ -2,10 +2,14 @@
 #define CONTENTMANAGER_H
 
 #include "../property.h"
+#include "../type.h"
 #include "../iserviceprovider.h"
+#include "../stream.h"
 
 #include <string>
 #include <vector>
+#include <map>
+#include <algorithm>
 
 namespace yna
 {
@@ -36,6 +40,7 @@ class ContentManager
 {
     std::string _rootDirectory;
     IServiceProvider* _serviceProvider;
+    std::map<std::string, void*> _loadedAssets;
 public:
     ContentManager(IServiceProvider* serviceProvider);
     ContentManager(IServiceProvider* serviceProvider, const std::string& rootFirectory);
@@ -45,16 +50,17 @@ public:
     get_property<IServiceProvider*> ServiceProvider;
 
     // Loads an asset that has been processed by the Content Pipeline.
-    graphics::Effect* LoadEffect(const std::string& name);
-    graphics::Model* LoadModel(const std::string& name);
-    graphics::SpriteFont* LoadSpriteFont(const std::string& name);
-    graphics::Texture2D* LoadTexture2D(const std::string& name);
+    graphics::Effect* LoadEffect(const std::string& assetName);
+    graphics::Model* LoadModel(const std::string& assetName);
+    graphics::SpriteFont* LoadSpriteFont(const std::string& assetName);
+    graphics::Texture2D* LoadTexture2D(const std::string& assetName);
 
     // Disposes all data that was loaded by this ContentManager.
     void Unload();
 
-    // Low-level worker method that reads asset data.
-    bool ReadAsset(const std::string& assetName, std::vector<unsigned char>& buffer);
+protected:
+    void* Load(const std::string& assetName);
+    Stream* OpenStream(const std::string& assetName);
 };
 
 }

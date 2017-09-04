@@ -9,7 +9,7 @@ GraphicsDeviceManager::GraphicsDeviceManager(Game* game)
     : _game(game)
 {
     GamePlatform::PlatformCreate(game);
-    game->Services.get()->AddService(this);
+    game->Services->AddService(this);
 }
 
 const std::string& GraphicsDeviceManager::Name() const

@@ -39,7 +39,8 @@ class get_property
 public:
     get_property(TProperty const& v) : _value(v) { }
 
-    operator TProperty const & () { return _value; }
+    operator const TProperty& () const { return _value; }
+    TProperty const & operator -> () { return _value; }
 
     TProperty const& get() const { return _value; }
 };

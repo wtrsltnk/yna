@@ -34,6 +34,8 @@ add_library(yna.framework
     point.cpp
     point.h
     property.h
+    type.h
+    stream.h
     quaternion.cpp
     quaternion.h
     rectangle.cpp
@@ -50,12 +52,12 @@ add_library(yna.framework
     content/contentmanager.h
     content/contentreader.cpp
     content/contentreader.h
-    content/pipline/graphics/texturecontent.cpp
-    content/pipline/graphics/texturecontent.h
-    content/pipline/textureimporter.cpp
-    content/pipline/textureimporter.h
-    content/pipline/contentitem.cpp
-    content/pipline/contentitem.h
+    content/texture2dreader.cpp
+    content/texture2dreader.h
+    content/contenttypereadermanager.cpp
+    content/contenttypereadermanager.h
+    content/contenttypereader.cpp
+    content/contenttypereader.h
     graphics/effect.cpp
     graphics/effect.h
     graphics/igraphicsdeviceservice.h

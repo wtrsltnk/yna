@@ -1,15 +1,18 @@
 #include "contentmanager.h"
+#include "contenttypereadermanager.h"
 #include "../graphics/effect.h"
 #include "../graphics/model.h"
 #include "../graphics/spritefont.h"
 #include "../graphics/texture2d.h"
-#include "pipline/textureimporter.h"
+#include "../type.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include <algorithm>
+#include <memory>
 
 using namespace yna::framework;
 using namespace yna::framework::content;
+
+static ContentTypeReaderManager _ContentTypeReaderManager;
 
 ContentManager::ContentManager(IServiceProvider* serviceProvider)
     : _serviceProvider(serviceProvider),
@@ -21,71 +24,149 @@ ContentManager::ContentManager(IServiceProvider* serviceProvider, const std::str
       RootDirectory(_rootDirectory), ServiceProvider(_serviceProvider)
 { }
 
-graphics::Effect* ContentManager::LoadEffect(const std::string& name) { return nullptr; }
+graphics::Effect* ContentManager::LoadEffect(const std::string& assetName) { return nullptr; }
 
-graphics::Model* ContentManager::LoadModel(const std::string& name) { return nullptr; }
+graphics::Model* ContentManager::LoadModel(const std::string& assetName) { return nullptr; }
 
-graphics::SpriteFont* ContentManager::LoadSpriteFont(const std::string& name) { return nullptr; }
+graphics::SpriteFont* ContentManager::LoadSpriteFont(const std::string& assetName) { return nullptr; }
 
-graphics::Texture2D* ContentManager::LoadTexture2D(const std::string& name)
+graphics::Texture2D* ContentManager::LoadTexture2D(const std::string& assetName)
 {
-    auto textureImporter = _serviceProvider->GetService("TextureImporter");
+    auto result = static_cast<graphics::Texture2D*>(Load(assetName));
 
-    if (textureImporter == nullptr)
+    if (result != nullptr)
+    {
+        return result;
+    }
+
+    auto reader = _ContentTypeReaderManager.GetTypeReader(Type(typeid(graphics::Texture2D)));
+    if (reader == nullptr)
     {
         return nullptr;
     }
 
-    // todo: determine full filename
-    std::string filename = name;
+    std::unique_ptr<Stream, std::function<void(Stream*)>> stream(OpenStream(assetName), [] (Stream* ptr) { ptr->Close(); delete ptr; });
+    if (stream == nullptr)
+    {
+        return nullptr;
+    }
 
-//    std::vector<unsigned char> buffer;
-//    if (!ReadAsset(name, buffer))
-//    {
-//        return nullptr;
-//    }
+    ContentReader contentReader(stream.get(), this);
 
-    auto textureContent = ((pipline::TextureImporter*)textureImporter)->Import(filename);
+    result = static_cast<graphics::Texture2D*>(reader->Read(&contentReader));
 
-//    int w, h, comp;
+    return result;
+}
 
-//    auto texture = new graphics::Texture2D();
+void* ContentManager::Load(const std::string& assetName)
+{
+    auto key = assetName;
 
-//    Color* colorData = (Color*)stbi_load_from_memory(buffer.data(), buffer.size(), &w, &h, &comp, 4);
+    std::replace(key.begin(), key.end(), '\\', '/');
 
-//    std::vector<Color> colorVector(colorData, colorData + (w * h));
-//    texture->SetData(colorVector, w, h);
+    auto found = _loadedAssets.find(key);
 
-//    delete []colorData;
+    if (found != _loadedAssets.end())
+    {
+        return found->second;
+    }
 
-//    return texture;
+    return nullptr;
+}
+
+class ReadFileStream : public Stream
+{
+    FILE* _file;
+    long _length;
+public:
+    ReadFileStream(const std::string& filename)
+        : _file(0), _length(0)
+    {
+        _file = fopen(filename.c_str(), "r");
+        fseek(_file, 0, SEEK_END);
+        _length = ftell(_file);
+        fseek(_file, 0, SEEK_SET);
+    }
+
+    virtual bool CanRead() { return _file != nullptr; }
+    virtual bool CanSeek() { return _file != nullptr; }
+    virtual bool CanWrite() { return false; }
+    virtual long Length() { return _length; }
+    virtual long Position() { return _file != nullptr ? ftell(_file) : 0; }
+
+    // When overridden in a derived class, sets the position within the current stream.
+    virtual void Seek(long offset, SeekOrigin origin)
+    {
+        fseek(_file, offset, origin == SeekOrigin::Begin ? SEEK_SET : origin == SeekOrigin::Current ? SEEK_CUR : SEEK_END);
+    }
+
+    // When overridden in a derived class, reads a sequence of bytes from the current stream
+    //      and advances the position within the stream by the number of bytes read.
+    virtual long Read(std::vector<byte>& buffer, long offset, long count)
+    {
+        if (offset != 0)
+        {
+            Seek(offset, SeekOrigin::Current);
+        }
+
+        std::vector<unsigned char> buf(count);
+        auto readBytes = fread(reinterpret_cast<byte*>(buf.data()), sizeof(byte), count, _file);
+
+        buffer.swap(buf);
+
+        return readBytes;
+    }
+
+    // When overridden in a derived class, writes a sequence of bytes to the current stream
+    //      and advances the current position within this stream by the number of bytes written.
+    virtual void Write(const std::vector<byte>& buffer, long offset, long count) { }
+
+    // Closes the current stream and releases any resources (such as sockets and file handles)
+    //      associated with the current stream.
+    virtual void Close()
+    {
+        fclose(_file);
+        _file = nullptr;
+    }
+};
+
+Stream* ContentManager::OpenStream(const std::string &assetName)
+{
+    auto result = new ReadFileStream(assetName);
+
+    if (result->CanRead())
+    {
+        return result;
+    }
+
+    return nullptr;
 }
 
 void ContentManager::Unload()
 { }
 
-bool ContentManager::ReadAsset(const std::string& assetName, std::vector<unsigned char>& buffer)
-{
-    // todo: determine full filename
-    std::string filename = assetName;
+//bool ContentManager::ReadAsset(const std::string& assetName, std::vector<unsigned char>& buffer)
+//{
+//    // todo: determine full filename
+//    std::string filename = assetName;
 
-    buffer.clear();
+//    buffer.clear();
 
-    auto file = fopen(filename.c_str(), "r");
-    if (file != nullptr)
-    {
-        fseek(file, 0, SEEK_END);
-        auto size = ftell(file);
-        fseek(file, 0, SEEK_SET);
+//    auto file = fopen(filename.c_str(), "r");
+//    if (file != nullptr)
+//    {
+//        fseek(file, 0, SEEK_END);
+//        auto size = ftell(file);
+//        fseek(file, 0, SEEK_SET);
 
-        std::vector<unsigned char> buf(size);
-        fread(reinterpret_cast<unsigned char *>(buf.data()), sizeof(unsigned char), size + 1, file);
+//        std::vector<unsigned char> buf(size);
+//        fread(reinterpret_cast<unsigned char *>(buf.data()), sizeof(unsigned char), size + 1, file);
 
-        fclose(file);
-        buffer.swap(buf);
+//        fclose(file);
+//        buffer.swap(buf);
 
-        return true;
-    }
+//        return true;
+//    }
 
-    return false;
-}
+//    return false;
+//}
