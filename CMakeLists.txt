@@ -32,6 +32,7 @@ add_library(yna.framework
     include/gamewindow.h
     src/graphicsdevicemanager.cpp
     include/graphicsdevicemanager.h
+    include/graphics/clearoptions.h
     src/matrix.cpp
     include/matrix.h
     src/plane.cpp
@@ -80,6 +81,12 @@ add_library(yna.framework
     include/graphics/texture.h
     src/graphics/texture2D.cpp
     include/graphics/texture2D.h
+    src/graphics/vertexbuffer.cpp
+    include/graphics/vertexbuffer.h
+    src/graphics/vertexdeclaration.cpp
+    include/graphics/vertexdeclaration.h
+    src/graphics/vertexelement.cpp
+    include/graphics/vertexelement.h
     )
 
 if (WIN32)

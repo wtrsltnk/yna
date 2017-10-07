@@ -6,6 +6,7 @@
 #include <random>
 
 #include <graphics/texture2d.h>
+#include <color.h>
 
 class ExampleGame : public yna::framework::Game
 {
@@ -30,6 +31,8 @@ public:
 
     virtual void Draw(const yna::framework::GameTime& gameTime)
     {
+        GraphicsDevice.get()->Clear(yna::framework::Color(76, 152, 255, 255));
+
 //        std::cout << "Draw\n"
 //                  << gameTime.TotalGameTime << "\n"
 //                  << gameTime.ElapsedGameTime << std::endl;

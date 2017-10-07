@@ -21,7 +21,16 @@ public:
     bool Create(WindowHandle handle);
     bool MakeCurrent();
 
+    virtual void Clear(graphics::ClearOptions options, const Color& color, float depth, int stencil);
+    virtual void Clear(graphics::ClearOptions options, const Vector4& color, float depth, int stencil);
+    virtual void Clear(const Color& color);
+
+    virtual void DrawPrimitives(graphics::PrimitiveType primitiveType, int startVertex, int primitiveCount);
+
     virtual void Present();
+
+    virtual void SetVertexBuffer(const graphics::VertexBuffer& vertexBuffer);
+    virtual void SetVertexBuffer(const graphics::VertexBuffer& vertexBuffer, int vertexOffset);
 };
 
 Win32OpenGLGraphicsDevice::Win32OpenGLGraphicsDevice()
@@ -92,9 +101,52 @@ bool Win32OpenGLGraphicsDevice::MakeCurrent()
     return wglMakeCurrent(deviceConext, renderContext);
 }
 
+void Win32OpenGLGraphicsDevice::Clear(yna::framework::graphics::ClearOptions options, const Color& color, float depth, int stencil)
+{
+    MakeCurrent();
+
+    glClearColor(float(color.R) / 255.0f, float(color.G) / 255.0f, float(color.B) / 255.0f, float(color.A) / 255.0f);
+    glClearDepth(depth);
+    glClearStencil(stencil);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+}
+
+void Win32OpenGLGraphicsDevice::Clear(yna::framework::graphics::ClearOptions options, const Vector4& color, float depth, int stencil)
+{
+    MakeCurrent();
+
+    glClearColor(float(color.X) / 255.0f, float(color.Y) / 255.0f, float(color.Z) / 255.0f, float(color.W) / 255.0f);
+    glClearDepth(depth);
+    glClearStencil(stencil);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+}
+
+void Win32OpenGLGraphicsDevice::Clear(const Color& color)
+{
+    MakeCurrent();
+
+    glClearColor(float(color.R) / 255.0f, float(color.G) / 255.0f, float(color.B) / 255.0f, float(color.A) / 255.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Win32OpenGLGraphicsDevice::DrawPrimitives(graphics::PrimitiveType primitiveType, int startVertex, int primitiveCount)
+{
+    // todo
+}
+
 void Win32OpenGLGraphicsDevice::Present()
 {
     SwapBuffers(this->deviceConext);
+}
+
+void Win32OpenGLGraphicsDevice::SetVertexBuffer(const yna::framework::graphics::VertexBuffer& vertexBuffer)
+{
+    // todo
+}
+
+void Win32OpenGLGraphicsDevice::SetVertexBuffer(const yna::framework::graphics::VertexBuffer& vertexBuffer, int vertexOffset)
+{
+    // todo
 }
 
 
@@ -293,10 +345,6 @@ bool Win32Platform::BeforeDraw()
     }
 
     glViewport(0, 0, _window->ClientSizeWidth, _window->ClientSizeHeight);
-
-    glClearColor(0.3f, 0.6f, 1.0f, 1.0f);
-
-    glClear(GL_COLOR_BUFFER_BIT);
 
     return true;
 }
