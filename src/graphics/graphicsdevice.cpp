@@ -1,4 +1,4 @@
-#include "graphicsdevice.h"
+#include "graphics/graphicsdevice.h"
 
 using namespace yna::framework::graphics;
 

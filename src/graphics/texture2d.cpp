@@ -1,4 +1,4 @@
-#include "texture2d.h"
+#include "graphics/texture2d.h"
 
 using namespace yna::framework::graphics;
 

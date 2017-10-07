@@ -1,4 +1,4 @@
-#include "contenttypereadermanager.h"
+#include "content/contenttypereadermanager.h"
 #include "texture2dreader.h"
 
 #include <algorithm>

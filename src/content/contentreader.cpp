@@ -1,4 +1,4 @@
-#include "contentreader.h"
+#include "content/contentreader.h"
 
 using namespace yna::framework::content;
 

@@ -1,9 +1,9 @@
 #ifndef TEXTURE2DREADER_H
 #define TEXTURE2DREADER_H
 
-#include "contenttypereader.h"
-#include "../graphics/texture2d.h"
-#include "contenttypereadermanager.h"
+#include "content/contenttypereader.h"
+#include "graphics/texture2d.h"
+#include "content/contenttypereadermanager.h"
 
 namespace yna
 {

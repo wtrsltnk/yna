@@ -1,5 +1,5 @@
 #include "texture2dreader.h"
-#include "../graphics/texture2d.h"
+#include "graphics/texture2d.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

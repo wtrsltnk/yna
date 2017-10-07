@@ -1,4 +1,4 @@
-#include "graphicsresource.h"
+#include "graphics/graphicsresource.h"
 
 using namespace yna::framework::graphics;
 

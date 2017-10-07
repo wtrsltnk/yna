@@ -1,10 +1,10 @@
-#include "contentmanager.h"
-#include "contenttypereadermanager.h"
-#include "../graphics/effect.h"
-#include "../graphics/model.h"
-#include "../graphics/spritefont.h"
-#include "../graphics/texture2d.h"
-#include "../type.h"
+#include "content/contentmanager.h"
+#include "content/contenttypereadermanager.h"
+#include "graphics/effect.h"
+#include "graphics/model.h"
+#include "graphics/spritefont.h"
+#include "graphics/texture2d.h"
+#include "type.h"
 
 #include <algorithm>
 #include <memory>

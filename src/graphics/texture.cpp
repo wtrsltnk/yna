@@ -1,4 +1,4 @@
-#include "texture.h"
+#include "graphics/texture.h"
 
 using namespace yna::framework::graphics;
 

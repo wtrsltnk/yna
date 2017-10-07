@@ -1,4 +1,4 @@
-#include "effect.h"
+#include "graphics/effect.h"
 
 using namespace yna::framework::graphics;
 
