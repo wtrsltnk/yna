@@ -16,7 +16,7 @@ class GraphicsResource
 {
 protected:
     class GraphicsDevice* _graphicsDevice;
-    GraphicsResource();
+    GraphicsResource(class GraphicsDevice* graphicsDevice);
 
 public:
     get_property<class GraphicsDevice*> GraphicsDevice;

@@ -36,8 +36,8 @@ public:
     virtual void Present() = 0;
 
     // Sets or binds a vertex buffer to a device.
-    virtual void SetVertexBuffer(const VertexBuffer& vertexBuffer) = 0;
-    virtual void SetVertexBuffer(const VertexBuffer& vertexBuffer, int vertexOffset) = 0;
+    virtual void SetVertexBuffer(VertexBuffer& vertexBuffer) = 0;
+    virtual void SetVertexBuffer(VertexBuffer& vertexBuffer, int vertexOffset) = 0;
 };
 
 }

@@ -17,7 +17,7 @@ class Texture : public GraphicsResource
 {
     SurfaceFormat _format;
 public:
-    Texture();
+    Texture(class GraphicsDevice* graphicsDevice);
 
     get_property<SurfaceFormat> Format;
 };

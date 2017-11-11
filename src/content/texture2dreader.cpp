@@ -1,5 +1,7 @@
 #include "texture2dreader.h"
 #include "graphics/texture2d.h"
+#include "content/contentmanager.h"
+#include "graphicsdevicemanager.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -20,9 +22,11 @@ void* Texture2DReader::Read(ContentReader* input)
 
     int w, h, comp;
 
-    auto texture = new graphics::Texture2D();
-
     Color* colorData = (Color*)stbi_load_from_memory(buffer.data(), buffer.size(), &w, &h, &comp, 4);
+
+    auto grahicsDeviceManager = (GraphicsDeviceManager*)input->ContentManager->ServiceProvider->GetService("GraphicsDeviceManager");
+
+    auto texture = new graphics::Texture2D(grahicsDeviceManager->GetGraphicsDevice(), w, h);
 
     std::vector<Color> colorVector(colorData, colorData + (w * h));
     texture->SetData(colorVector, w, h);

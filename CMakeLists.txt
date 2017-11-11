@@ -66,6 +66,7 @@ add_library(yna.framework
     include/content/contenttypereadermanager.h
     src/content/contenttypereader.cpp
     include/content/contenttypereader.h
+    include/graphics/bufferusage.h
     src/graphics/effect.cpp
     include/graphics/effect.h
     include/graphics/igraphicsdeviceservice.h
@@ -87,6 +88,7 @@ add_library(yna.framework
     include/graphics/vertexdeclaration.h
     src/graphics/vertexelement.cpp
     include/graphics/vertexelement.h
+    src/graphics/glextl.cpp
     )
 
 if (WIN32)

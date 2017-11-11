@@ -1,11 +1,14 @@
+
 #include "gameplatform.h"
 #include "game.h"
 #include "gamewindow.h"
 #include "graphics/graphicsdevice.h"
+#include "graphics/vertexelement.h"
 #include "platform.h"
 
+#include <map>
 #include <iostream>
-#include <GL/gl.h>
+#include <GL/glextl.h>
 
 using namespace yna::framework;
 
@@ -14,6 +17,8 @@ class Win32OpenGLGraphicsDevice : public graphics::GraphicsDevice
     WindowHandle _handle;
     HDC deviceConext;
     HGLRC renderContext;
+    std::map<const graphics::VertexBuffer*, GLuint> _boundVertexBuffers;
+    graphics::VertexBuffer* _currentVertexBuffer;
 
 public:
     Win32OpenGLGraphicsDevice();
@@ -29,11 +34,12 @@ public:
 
     virtual void Present();
 
-    virtual void SetVertexBuffer(const graphics::VertexBuffer& vertexBuffer);
-    virtual void SetVertexBuffer(const graphics::VertexBuffer& vertexBuffer, int vertexOffset);
+    virtual void SetVertexBuffer(graphics::VertexBuffer& vertexBuffer);
+    virtual void SetVertexBuffer(graphics::VertexBuffer& vertexBuffer, int vertexOffset);
 };
 
 Win32OpenGLGraphicsDevice::Win32OpenGLGraphicsDevice()
+    : _currentVertexBuffer(nullptr)
 { }
 
 bool InitPixelFormat(HDC hDC)
@@ -129,9 +135,86 @@ void Win32OpenGLGraphicsDevice::Clear(const Color& color)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
+int VertexElementFormatSize(graphics::VertexElementFormats format)
+{
+    switch (format) {
+    case graphics::VertexElementFormats::Byte4: return 4;
+    case graphics::VertexElementFormats::Color: return 4;
+    case graphics::VertexElementFormats::HalfVector2: return 2;
+    case graphics::VertexElementFormats::HalfVector4: return 4;
+    case graphics::VertexElementFormats::NormalizedShort2: return 2;
+    case graphics::VertexElementFormats::NormalizedShort4: return 4;
+    case graphics::VertexElementFormats::Short2: return 2;
+    case graphics::VertexElementFormats::Short4: return 4;
+    case graphics::VertexElementFormats::Single: return 1;
+    case graphics::VertexElementFormats::Vector2: return 2;
+    case graphics::VertexElementFormats::Vector3: return 3;
+    case graphics::VertexElementFormats::Vector4: return 4;
+    }
+    return 4;
+}
+
+GLenum ComponentTypeFromVertexElementFormat(graphics::VertexElementFormats format)
+{
+    switch (format) {
+    case graphics::VertexElementFormats::Byte4: return GL_BYTE;
+    case graphics::VertexElementFormats::Color: return GL_BYTE;
+    case graphics::VertexElementFormats::HalfVector2: return GL_FLOAT;
+    case graphics::VertexElementFormats::HalfVector4: return GL_FLOAT;
+    case graphics::VertexElementFormats::NormalizedShort2: return GL_SHORT;
+    case graphics::VertexElementFormats::NormalizedShort4: return GL_SHORT;
+    case graphics::VertexElementFormats::Short2: return GL_SHORT;
+    case graphics::VertexElementFormats::Short4: return GL_SHORT;
+    case graphics::VertexElementFormats::Single: return GL_INT;
+    case graphics::VertexElementFormats::Vector2: return GL_FLOAT;
+    case graphics::VertexElementFormats::Vector3: return GL_FLOAT;
+    case graphics::VertexElementFormats::Vector4: return GL_FLOAT;
+    }
+    return GL_FLOAT;
+}
+
+
 void Win32OpenGLGraphicsDevice::DrawPrimitives(graphics::PrimitiveType primitiveType, int startVertex, int primitiveCount)
 {
-    // todo
+    if (this->_currentVertexBuffer == nullptr)
+    {
+        return;
+    }
+
+    graphics::VertexDeclaration vd = this->_currentVertexBuffer->VertexDeclaration;
+    for (int i = 0; i < vd.GetVertexElements().size(); ++i)
+    {
+        auto element = vd.GetVertexElements()[i];
+        glVertexAttribPointer(i, VertexElementFormatSize(element.VertexElementFormat),
+                              ComponentTypeFromVertexElementFormat(element.VertexElementFormat),
+                              GL_FALSE, 0, (void*)element.Offset);
+        glEnableVertexAttribArray(i);
+    }
+
+    if (primitiveType == graphics::PrimitiveType::LineList)
+    {
+        glDrawArrays(GL_LINES, startVertex, primitiveCount);
+    }
+
+    if (primitiveType == graphics::PrimitiveType::LineStrip)
+    {
+        glDrawArrays(GL_LINE_STRIP, startVertex, primitiveCount);
+    }
+
+    if (primitiveType == graphics::PrimitiveType::TriangleList)
+    {
+        glDrawArrays(GL_TRIANGLES, startVertex, primitiveCount);
+    }
+
+    if (primitiveType == graphics::PrimitiveType::TriangleStrip)
+    {
+        glDrawArrays(GL_TRIANGLE_STRIP, startVertex, primitiveCount);
+    }
+
+    for (int i = 0; i < vd.GetVertexElements().size(); ++i)
+    {
+        glDisableVertexAttribArray(i);
+    }
 }
 
 void Win32OpenGLGraphicsDevice::Present()
@@ -139,12 +222,32 @@ void Win32OpenGLGraphicsDevice::Present()
     SwapBuffers(this->deviceConext);
 }
 
-void Win32OpenGLGraphicsDevice::SetVertexBuffer(const yna::framework::graphics::VertexBuffer& vertexBuffer)
+void Win32OpenGLGraphicsDevice::SetVertexBuffer(yna::framework::graphics::VertexBuffer& vertexBuffer)
 {
-    // todo
+    GLuint bufferIndex;
+
+    if (_boundVertexBuffers.find(&vertexBuffer) == _boundVertexBuffers.end())
+    {
+        glGenBuffers(1, &bufferIndex);
+        _boundVertexBuffers.insert(std::make_pair(&vertexBuffer, bufferIndex));
+    }
+    else
+    {
+        bufferIndex = _boundVertexBuffers.find(&vertexBuffer)->second;
+    }
+
+    byte* buffer;
+    graphics::VertexDeclaration vdecl = vertexBuffer.VertexDeclaration.get();
+    vertexBuffer.GetData(0, &buffer, 0, vertexBuffer.VertexCount.get(), vdecl.VertexStride.get());
+
+    glBindBuffer(GL_ARRAY_BUFFER, bufferIndex);
+    glBufferData(GL_ARRAY_BUFFER, vdecl.VertexStride, &buffer, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    _currentVertexBuffer = &vertexBuffer;
 }
 
-void Win32OpenGLGraphicsDevice::SetVertexBuffer(const yna::framework::graphics::VertexBuffer& vertexBuffer, int vertexOffset)
+void Win32OpenGLGraphicsDevice::SetVertexBuffer(yna::framework::graphics::VertexBuffer& vertexBuffer, int vertexOffset)
 {
     // todo
 }

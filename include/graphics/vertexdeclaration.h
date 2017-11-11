@@ -18,7 +18,10 @@ namespace graphics
 
 class VertexDeclaration : public GraphicsResource
 {
+    std::vector<VertexElement>& _elements;
 public:
+    VertexDeclaration(class GraphicsDevice* graphicsDevice, int vertexStride, std::vector<VertexElement>& elements);
+
     // The number of bytes from one vertex to the next.
     property<int> VertexStride;
 

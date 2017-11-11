@@ -19,7 +19,7 @@ class Texture2D : public Texture
 {
     Rectangle _bounds;
 public:
-    Texture2D();
+    Texture2D(class GraphicsDevice* graphicsDevice, int width, int height);
 
     get_property<Rectangle> Bounds;
     getref_property<int> Height;
