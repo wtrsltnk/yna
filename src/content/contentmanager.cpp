@@ -39,7 +39,7 @@ graphics::Texture2D* ContentManager::LoadTexture2D(const std::string& assetName)
         return result;
     }
 
-    auto reader = _ContentTypeReaderManager.GetTypeReader(Type(typeid(graphics::Texture2D)));
+    auto reader = _ContentTypeReaderManager.GetTypeReader(Type(typeid(graphics::Texture2D).name()));
     if (reader == nullptr)
     {
         return nullptr;

@@ -5,7 +5,8 @@
 
 using namespace yna::framework;
 
-GraphicsDeviceManager::GraphicsDeviceManager(Game* game)
+GraphicsDeviceManager::GraphicsDeviceManager(
+    Game* game)
     : _game(game)
 {
     GamePlatform::PlatformCreate(game);

@@ -2,17 +2,19 @@
 #define TYPE_H
 
 #include <typeinfo>
+#include <string>
 
-class Type : public std::type_info
+class Type
 {
-public:
-    template <class T>
-    Type() : type_info(typeid(T).name()) { }
-    Type(const char* name) : type_info(name) { }
-    Type(const type_info& t) : type_info(t.name()) { }
-    Type(const Type& t) : type_info(t.name()) { }
+    std::string _name;
 
-    bool operator < (const type_info& t) const { return  this->hash_code() < t.hash_code(); }
+public:
+    Type(const char *name) : _name(name) {}
+    Type(const type_info &t) : _name(t.name()) {}
+    Type(const Type &t) : _name(t.name()) {}
+
+    const char *name() const { return _name.c_str(); }
+    bool operator<(const Type &t) const { return this->_name < t.name(); }
 };
 
 #endif // TYPE_H

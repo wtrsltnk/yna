@@ -1,6 +1,6 @@
 #include "doctest.h"
 #include <property.h>
-#include <type.h>
+//#include <type.h>
 #include <iostream>
 
 class RegularClass

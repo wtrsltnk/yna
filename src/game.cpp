@@ -1,33 +1,40 @@
 #include "game.h"
 #include "gamecomponentcollection.h"
-#include "gameservicecontainer.h"
 #include "gameplatform.h"
+#include "gameservicecontainer.h"
 #include "gametime.h"
 #include <iostream>
 
 using namespace yna::framework;
 
 Game::Game()
-    : _graphicsDevice(nullptr),
-      _services(nullptr),
-      _components(nullptr),
-      Window(_window),
+    : Content(_content),
       GraphicsDevice(_graphicsDevice),
-      Components(_components),
       Services(_services),
-      Content(_content)
+      Components(_components),
+      Window(_window),
+      _graphicsDevice(nullptr),
+      _services(nullptr),
+      _components(nullptr)
 {
-    this->IsFixedTimeStep = false;
-    this->TargetElapsedTime = 0.0;
+    IsFixedTimeStep = false;
+    TargetElapsedTime = 0.0;
 
-    this->_services = new GameServiceContainer();
-    this->_components = new GameComponentCollection();
-    this->_content = new content::ContentManager(_services);
+    _services = new GameServiceContainer();
+    _components = new GameComponentCollection();
+    _content = new content::ContentManager(_services);
 }
 
 Game::~Game()
 {
-    // Destroy GraphicsDevice
+    delete _content;
+    _content = nullptr;
+
+    delete _components;
+    _components = nullptr;
+
+    delete _services;
+    _services = nullptr;
 }
 
 void Game::Run()

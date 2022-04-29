@@ -5,7 +5,7 @@
 
 using namespace yna::framework::content;
 
-std::map<Type, ContentTypeReaderFactory*> ContentTypeReaderManager::_contentTypeReaderFactories;
+std::map<Type, ContentTypeReaderFactory *> ContentTypeReaderManager::_contentTypeReaderFactories;
 
 ContentTypeReaderManager::ContentTypeReaderManager()
 {
@@ -13,7 +13,7 @@ ContentTypeReaderManager::ContentTypeReaderManager()
     Texture2DReader::textureContentTypeReaderFactory.Init();
 }
 
-ContentTypeReader* ContentTypeReaderManager::GetTypeReader(Type targetType)
+ContentTypeReader *ContentTypeReaderManager::GetTypeReader(Type targetType)
 {
     auto found = _contentTypeReaderFactories.find(targetType);
 
@@ -28,19 +28,19 @@ ContentTypeReader* ContentTypeReaderManager::GetTypeReader(Type targetType)
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace content
-{
+        namespace content
+        {
 
-void AddContentTypeReader(Type targetType, ContentTypeReaderFactory* factory)
-{
-    ContentTypeReaderManager::_contentTypeReaderFactories.insert(std::make_pair(targetType, factory));
-}
+            void AddContentTypeReader(Type targetType, ContentTypeReaderFactory *factory)
+            {
+                ContentTypeReaderManager::_contentTypeReaderFactories.insert(std::make_pair(targetType, factory));
+            }
 
-}
+        } // namespace content
 
-}
+    } // namespace framework
 
-}
+} // namespace yna

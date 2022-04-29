@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.7)
 
+include(cmake/get_cpm.cmake)
+
 project(yna)
 
 option(YNA_BUILD_EXAMPLES "Build the YNA example programs" ON)
@@ -8,103 +10,102 @@ option(YNA_BUILD_TESTS "Build the YNA test programs" ON)
 find_package(OpenGL REQUIRED)
 
 add_library(yna.framework
-    src/boundingbox.cpp
     include/boundingbox.h
-    src/boundingfrustum.cpp
     include/boundingfrustum.h
-    src/boundingsphere.cpp
     include/boundingsphere.h
-    src/color.cpp
     include/color.h
-    src/game.cpp
+    include/containmenttype.h
+    include/content/contentmanager.h
+    include/content/contentreader.h
+    include/content/contenttypereader.h
+    include/content/contenttypereadermanager.h
     include/game.h
-    src/gamecomponent.cpp
     include/gamecomponent.h
-    src/gamecomponentcollection.cpp
     include/gamecomponentcollection.h
+    include/gameservicecontainer.h
+    include/gametime.h
+    include/gamewindow.h
+    include/graphics/bufferusage.h
+    include/graphics/clearoptions.h
+    include/graphics/effect.h
+    include/graphics/graphicsdevice.h
+    include/graphics/graphicsresource.h
+    include/graphics/igraphicsdeviceservice.h
+    include/graphics/model.h
+    include/graphics/spritefont.h
+    include/graphics/texture.h
+    include/graphics/texture2D.h
+    include/graphics/vertexbuffer.h
+    include/graphics/vertexdeclaration.h
+    include/graphics/vertexelement.h
+    include/graphicsdevicemanager.h
+    include/matrix.h
+    include/plane.h
+    include/planeintersectiontype.h
+    include/planeintersectiontype.h
+    include/platform.h
+    include/point.h
+    include/property.h
+    include/quaternion.h
+    include/rectangle.h
+    include/stream.h
+    include/type.h
+    include/vector2.h
+    include/vector3.h
+    include/vector4.h
+    src/boundingbox.cpp
+    src/boundingfrustum.cpp
+    src/boundingsphere.cpp
+    src/color.cpp
+    src/content/contentmanager.cpp
+    src/content/contentreader.cpp
+    src/content/contenttypereader.cpp
+    src/content/contenttypereadermanager.cpp
+    src/content/texture2dreader.cpp
+    src/content/texture2dreader.h
+    src/game.cpp
+    src/gamecomponent.cpp
+    src/gamecomponentcollection.cpp
     src/gameplatform.cpp
     src/gameplatform.h
     src/gameservicecontainer.cpp
-    include/gameservicecontainer.h
     src/gametime.cpp
-    include/gametime.h
     src/gamewindow.cpp
-    include/gamewindow.h
-    src/graphicsdevicemanager.cpp
-    include/graphicsdevicemanager.h
-    include/graphics/clearoptions.h
-    src/matrix.cpp
-    include/matrix.h
-    src/plane.cpp
-    include/plane.h
-    include/planeintersectiontype.h
-    include/platform.h
-    src/point.cpp
-    include/point.h
-    include/property.h
-    include/type.h
-    include/stream.h
-    src/quaternion.cpp
-    include/quaternion.h
-    src/rectangle.cpp
-    include/rectangle.h
-    src/vector2.cpp
-    include/vector2.h
-    src/vector3.cpp
-    include/vector3.h
-    src/vector4.cpp
-    include/vector4.h
-    include/containmenttype.h
-    include/planeintersectiontype.h
-    src/content/contentmanager.cpp
-    include/content/contentmanager.h
-    src/content/contentreader.cpp
-    include/content/contentreader.h
-    src/content/texture2dreader.cpp
-    src/content/texture2dreader.h
-    src/content/contenttypereadermanager.cpp
-    include/content/contenttypereadermanager.h
-    src/content/contenttypereader.cpp
-    include/content/contenttypereader.h
-    include/graphics/bufferusage.h
     src/graphics/effect.cpp
-    include/graphics/effect.h
-    include/graphics/igraphicsdeviceservice.h
+    src/graphics/glad.c
     src/graphics/graphicsdevice.cpp
-    include/graphics/graphicsdevice.h
     src/graphics/graphicsresource.cpp
-    include/graphics/graphicsresource.h
     src/graphics/model.cpp
-    include/graphics/model.h
     src/graphics/spritefont.cpp
-    include/graphics/spritefont.h
     src/graphics/texture.cpp
-    include/graphics/texture.h
     src/graphics/texture2D.cpp
-    include/graphics/texture2D.h
     src/graphics/vertexbuffer.cpp
-    include/graphics/vertexbuffer.h
     src/graphics/vertexdeclaration.cpp
-    include/graphics/vertexdeclaration.h
     src/graphics/vertexelement.cpp
-    include/graphics/vertexelement.h
-    src/graphics/glextl.cpp
-    )
+    src/graphicsdevicemanager.cpp
+    src/matrix.cpp
+    src/plane.cpp
+    src/point.cpp
+    src/quaternion.cpp
+    src/rectangle.cpp
+    src/vector2.cpp
+    src/vector3.cpp
+    src/vector4.cpp
+)
 
 if (WIN32)
     target_sources(yna.framework
         PRIVATE src/gameplatform.win32.cpp
-        )
+    )
 endif (WIN32)
 
 target_include_directories(yna.framework
     PUBLIC include
-    )
+)
 
 target_link_libraries(yna.framework
     ${OPENGL_LIBRARIES}
-#    glfw
-    )
+)
 
 target_compile_features(yna.framework
     PRIVATE cxx_auto_type
