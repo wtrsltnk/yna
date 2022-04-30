@@ -4,18 +4,18 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-enum class ContainmentType
-{
-    Contains,       // Indicates that one bounding volume completely contains the other.
-    Disjoint,       // Indicates there is no overlap between the bounding volumes.
-    Intersects,     // Indicates that the bounding volumes partially overlap.
-};
+        enum class ContainmentType
+        {
+            Contains,   // Indicates that one bounding volume completely contains the other.
+            Disjoint,   // Indicates there is no overlap between the bounding volumes.
+            Intersects, // Indicates that the bounding volumes partially overlap.
+        };
 
-}
+    }
 
-}
+} // namespace yna
 
 #endif // CONTAINMENTTYPE_H

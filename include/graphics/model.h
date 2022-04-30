@@ -4,22 +4,22 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class Model
-{
-public:
-    Model();
-};
+            class Model
+            {
+            public:
+                Model();
+            };
 
-}
+        } // namespace graphics
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // MODEL_H

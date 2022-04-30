@@ -4,23 +4,23 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-enum class ClearOptions
-{
-    DepthBuffer,
-    Stencil,
-    Target,
-};
+            enum class ClearOptions
+            {
+                DepthBuffer,
+                Stencil,
+                Target,
+            };
 
-}
+        }
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // CLEAROPTIONS_H

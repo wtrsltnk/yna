@@ -10,33 +10,34 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace content
-{
+        namespace content
+        {
 
-class ContentReader
-{
-    Stream* _stream;
-    class ContentManager* _contentManager;
-public:
-    ContentReader(Stream* stream, class ContentManager* contentManager);
+            class ContentReader
+            {
+                Stream *_stream;
+                class ContentManager *_contentManager;
 
-    // Gets the name of the asset currently being read by this ContentReader.
-    property<std::string> AssetName;
-    // Exposes access to the underlying stream of the BinaryReader.
-    get_property<Stream*> BaseStream;
-    // Gets the ContentManager associated with the ContentReader.
-    get_property<class ContentManager*> ContentManager;
+            public:
+                ContentReader(Stream *stream, class ContentManager *contentManager);
 
-    bool ReadBytes(int count, std::vector<byte>& buffer);
-};
+                // Gets the name of the asset currently being read by this ContentReader.
+                property<std::string> AssetName;
+                // Exposes access to the underlying stream of the BinaryReader.
+                get_property<Stream *> BaseStream;
+                // Gets the ContentManager associated with the ContentReader.
+                get_property<class ContentManager *> ContentManager;
 
-}
+                bool ReadBytes(int count, std::vector<byte> &buffer);
+            };
 
-}
+        } // namespace content
 
-}
+    } // namespace framework
+
+} // namespace yna
 
 #endif // CONTENTREADER_H

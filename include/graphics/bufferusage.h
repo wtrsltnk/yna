@@ -4,24 +4,24 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-enum class BufferUsage
-{
-    // None
-    None,
-    // Indicates that the application only writes to the vertex buffer. If specified, the driver chooses the best memory location for efficient writing and rendering. Attempts to read from a write-only vertex buffer fail.
-    WriteOnly,
-};
+            enum class BufferUsage
+            {
+                // None
+                None,
+                // Indicates that the application only writes to the vertex buffer. If specified, the driver chooses the best memory location for efficient writing and rendering. Attempts to read from a write-only vertex buffer fail.
+                WriteOnly,
+            };
 
-}
+        }
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // BUFFERUSAGE_H

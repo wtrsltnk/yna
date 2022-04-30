@@ -9,19 +9,23 @@ GameTime::GameTime()
     TotalGameTime = 0.0;
 }
 
-GameTime::GameTime(double elapsed, double total)
+GameTime::GameTime(
+    double elapsed,
+    double total)
 {
     ElapsedGameTime = elapsed;
     IsRunningSlowly = false;
     TotalGameTime = total;
 }
 
-GameTime::GameTime(double elapsed, double total, bool runningSlowly)
+GameTime::GameTime(
+    double elapsed,
+    double total,
+    bool runningSlowly)
 {
     ElapsedGameTime = elapsed;
     IsRunningSlowly = runningSlowly;
     TotalGameTime = total;
 }
 
-GameTime::~GameTime() { }
-
+GameTime::~GameTime() {}

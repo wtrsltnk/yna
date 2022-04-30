@@ -6,28 +6,28 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class GraphicsResource
-{
-protected:
-    class GraphicsDevice* _graphicsDevice;
-    GraphicsResource(class GraphicsDevice* graphicsDevice);
+            class GraphicsResource
+            {
+            protected:
+                class GraphicsDevice *_graphicsDevice;
+                GraphicsResource(class GraphicsDevice *graphicsDevice);
 
-public:
-    get_property<class GraphicsDevice*> GraphicsDevice;
-    property<std::string> Name;
-    property<std::string> Tag;
-};
+            public:
+                get_property<class GraphicsDevice *> GraphicsDevice;
+                property<std::string> Name;
+                property<std::string> Tag;
+            };
 
-}
+        } // namespace graphics
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // GRAPHICSRESOURCE_H

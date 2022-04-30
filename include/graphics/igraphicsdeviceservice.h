@@ -1,29 +1,28 @@
 #ifndef IGRAPHICSDEVICESERVICE_H
 #define IGRAPHICSDEVICESERVICE_H
 
+#include "../iserviceprovider.h"
 #include "../property.h"
-#include  "../iserviceprovider.h"
 
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class IGraphicsDeviceService : public IGameService
-{
-public:
-    virtual class GraphicsDevice* GetGraphicsDevice() = 0;
+            class IGraphicsDeviceService : public IGameService
+            {
+            public:
+                virtual class GraphicsDevice *GetGraphicsDevice() = 0;
+            };
 
-};
+        } // namespace graphics
 
-}
+    } // namespace framework
 
-}
-
-}
+} // namespace yna
 
 #endif // IGRAPHICSDEVICESERVICE_H

@@ -8,36 +8,36 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace content
-{
+        namespace content
+        {
 
-class ContentTypeReaderFactory
-{
-public:
-    virtual ContentTypeReader* Create() = 0;
-};
+            class ContentTypeReaderFactory
+            {
+            public:
+                virtual ContentTypeReader *Create() = 0;
+            };
 
-class ContentTypeReaderManager
-{
-    static std::map<Type, ContentTypeReaderFactory*> _contentTypeReaderFactories;
+            class ContentTypeReaderManager
+            {
+                static std::map<Type, ContentTypeReaderFactory *> _contentTypeReaderFactories;
 
-    friend void AddContentTypeReader(Type targetType, ContentTypeReaderFactory* factory);
+                friend void AddContentTypeReader(Type targetType, ContentTypeReaderFactory *factory);
 
-public:
-    ContentTypeReaderManager();
+            public:
+                ContentTypeReaderManager();
 
-    ContentTypeReader* GetTypeReader(Type targetType);
-};
+                ContentTypeReader *GetTypeReader(Type targetType);
+            };
 
-void AddContentTypeReader(Type targetType, ContentTypeReaderFactory* factory);
+            void AddContentTypeReader(Type targetType, ContentTypeReaderFactory *factory);
 
-}
+        } // namespace content
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // CONTENTTYPEREADERMANAGER_H

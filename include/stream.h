@@ -18,7 +18,7 @@ enum class SeekOrigin
 class Stream
 {
 public:
-    virtual ~Stream() { }
+    virtual ~Stream() {}
 
     virtual bool CanRead() = 0;
     virtual bool CanSeek() = 0;
@@ -30,10 +30,10 @@ public:
     virtual void Seek(long offset, SeekOrigin origin) = 0;
     // When overridden in a derived class, reads a sequence of bytes from the current stream
     //      and advances the position within the stream by the number of bytes read.
-    virtual long Read(std::vector<byte>& buffer, long offset, long count) = 0;
+    virtual long Read(std::vector<byte> &buffer, long offset, long count) = 0;
     // When overridden in a derived class, writes a sequence of bytes to the current stream
     //      and advances the current position within this stream by the number of bytes written.
-    virtual void Write(const std::vector<byte>& buffer, long offset, long count) = 0;
+    virtual void Write(const std::vector<byte> &buffer, long offset, long count) = 0;
 
     // Closes the current stream and releases any resources (such as sockets and file handles)
     //      associated with the current stream.

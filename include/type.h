@@ -1,8 +1,8 @@
 #ifndef TYPE_H
 #define TYPE_H
 
-#include <typeinfo>
 #include <string>
+#include <typeinfo>
 
 class Type
 {

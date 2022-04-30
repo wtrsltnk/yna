@@ -8,31 +8,30 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace content
-{
+        namespace content
+        {
 
-class ContentTypeReader
-{
-    Type _targetType;
-protected:
-    ContentTypeReader(Type targetType);
+            class ContentTypeReader
+            {
+                Type _targetType;
 
-public:
+            protected:
+                ContentTypeReader(Type targetType);
 
-    // Gets the type handled by this reader component.
-    get_property<Type> 	TargetType;
+            public:
+                // Gets the type handled by this reader component.
+                get_property<Type> TargetType;
 
-    virtual void* Read(ContentReader* input) = 0;
+                virtual void *Read(ContentReader *input) = 0;
+            };
 
-};
+        } // namespace content
 
-}
+    } // namespace framework
 
-}
-
-}
+} // namespace yna
 
 #endif // CONTENTTYPEREADER_H

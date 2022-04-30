@@ -4,18 +4,18 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-enum class PlaneIntersectionType
-{
-    Back,           // There is no intersection, and the bounding volume is in the negative half-space of the Plane.
-    Front,          // There is no intersection, and the bounding volume is in the positive half-space of the Plane.
-    Intersecting,   // The Plane is intersected.
-};
+        enum class PlaneIntersectionType
+        {
+            Back,         // There is no intersection, and the bounding volume is in the negative half-space of the Plane.
+            Front,        // There is no intersection, and the bounding volume is in the positive half-space of the Plane.
+            Intersecting, // The Plane is intersected.
+        };
 
-}
+    }
 
-}
+} // namespace yna
 
 #endif // PLANEINTERSECTIONTYPE_H

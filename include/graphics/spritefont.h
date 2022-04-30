@@ -4,22 +4,22 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class SpriteFont
-{
-public:
-    SpriteFont();
-};
+            class SpriteFont
+            {
+            public:
+                SpriteFont();
+            };
 
-}
+        } // namespace graphics
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // SPRITEFONT_H

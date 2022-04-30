@@ -4,25 +4,25 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-typedef unsigned char byte;
+        typedef unsigned char byte;
 
-struct Color
-{
-    Color();
-    Color(byte v);
-    Color(byte r, byte g, byte b, byte a = 255);
+        struct Color
+        {
+            Color();
+            Color(byte v);
+            Color(byte r, byte g, byte b, byte a = 255);
 
-    byte R;
-    byte G;
-    byte B;
-    byte A;
-};
+            byte R;
+            byte G;
+            byte B;
+            byte A;
+        };
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // COLOR_H

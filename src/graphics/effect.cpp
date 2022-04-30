@@ -3,4 +3,4 @@
 using namespace yna::framework::graphics;
 
 Effect::Effect()
-{ }
+{}

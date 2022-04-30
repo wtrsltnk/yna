@@ -3,4 +3,4 @@
 using namespace yna::framework;
 
 BoundingFrustum::BoundingFrustum()
-{ }
+{}

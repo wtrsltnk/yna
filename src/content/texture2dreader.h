@@ -2,42 +2,42 @@
 #define TEXTURE2DREADER_H
 
 #include "content/contenttypereader.h"
-#include "graphics/texture2d.h"
 #include "content/contenttypereadermanager.h"
+#include "graphics/texture2d.h"
 
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace content
-{
+        namespace content
+        {
 
-class TextureContentTypeReaderFactory : public ContentTypeReaderFactory
-{
-public:
-    TextureContentTypeReaderFactory();
+            class TextureContentTypeReaderFactory : public ContentTypeReaderFactory
+            {
+            public:
+                TextureContentTypeReaderFactory();
 
-    void Init();
+                void Init();
 
-    virtual ContentTypeReader* Create();
-};
+                virtual ContentTypeReader *Create();
+            };
 
-class Texture2DReader : public ContentTypeReader
-{
-public:
-    Texture2DReader();
+            class Texture2DReader : public ContentTypeReader
+            {
+            public:
+                Texture2DReader();
 
-    virtual void* Read(ContentReader* input);
+                virtual void *Read(ContentReader *input);
 
-    static TextureContentTypeReaderFactory textureContentTypeReaderFactory;
-};
+                static TextureContentTypeReaderFactory textureContentTypeReaderFactory;
+            };
 
-}
+        } // namespace content
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // TEXTURE2DREADER_H

@@ -2,9 +2,14 @@
 
 using namespace yna::framework::graphics;
 
-VertexDeclaration::VertexDeclaration(class GraphicsDevice* graphicsDevice, int vertexStride, std::vector<VertexElement>& elements)
-    : GraphicsResource(graphicsDevice), VertexStride(vertexStride), _elements(elements)
-{ }
+VertexDeclaration::VertexDeclaration(
+    class GraphicsDevice *graphicsDevice,
+    int vertexStride,
+    std::vector<VertexElement> &elements)
+    : GraphicsResource(graphicsDevice),
+      VertexStride(vertexStride),
+      _elements(elements)
+{}
 
 std::vector<VertexElement> VertexDeclaration::GetVertexElements()
 {

@@ -7,25 +7,26 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class Texture : public GraphicsResource
-{
-    SurfaceFormat _format;
-public:
-    Texture(class GraphicsDevice* graphicsDevice);
+            class Texture : public GraphicsResource
+            {
+                SurfaceFormat _format;
 
-    get_property<SurfaceFormat> Format;
-};
+            public:
+                Texture(class GraphicsDevice *graphicsDevice);
 
-}
+                get_property<SurfaceFormat> Format;
+            };
 
-}
+        } // namespace graphics
 
-}
+    } // namespace framework
+
+} // namespace yna
 
 #endif // TEXTURE_H

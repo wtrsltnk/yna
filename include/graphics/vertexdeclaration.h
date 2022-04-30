@@ -2,37 +2,42 @@
 #define VERTEXDECLARATION_H
 
 #include "graphicsresource.h"
-#include "vertexelement.h"
 #include "property.h"
+#include "vertexelement.h"
 
 #include <vector>
 
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class VertexDeclaration : public GraphicsResource
-{
-    std::vector<VertexElement>& _elements;
-public:
-    VertexDeclaration(class GraphicsDevice* graphicsDevice, int vertexStride, std::vector<VertexElement>& elements);
+            class VertexDeclaration : public GraphicsResource
+            {
+            public:
+                VertexDeclaration(
+                    class GraphicsDevice *graphicsDevice,
+                    int vertexStride,
+                    std::vector<VertexElement> &elements);
 
-    // The number of bytes from one vertex to the next.
-    property<int> VertexStride;
+                // The number of bytes from one vertex to the next.
+                property<int> VertexStride;
 
-    // Gets the vertex shader declaration.
-     std::vector<VertexElement> GetVertexElements();
-};
+                // Gets the vertex shader declaration.
+                std::vector<VertexElement> GetVertexElements();
 
-}
+            private:
+                std::vector<VertexElement> &_elements;
+            };
 
-}
+        } // namespace graphics
 
-}
+    } // namespace framework
+
+} // namespace yna
 
 #endif // VERTEXDECLARATION_H

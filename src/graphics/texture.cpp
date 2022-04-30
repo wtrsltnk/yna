@@ -3,6 +3,8 @@
 
 using namespace yna::framework::graphics;
 
-Texture::Texture(graphics::GraphicsDevice* graphicsDevice)
-    : GraphicsResource(graphicsDevice), Format(_format)
-{ }
+Texture::Texture(
+    graphics::GraphicsDevice *graphicsDevice)
+    : GraphicsResource(graphicsDevice),
+      Format(_format)
+{}

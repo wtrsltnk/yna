@@ -4,17 +4,17 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-class GameComponentCollection
-{
-public:
-    GameComponentCollection();
-};
+        class GameComponentCollection
+        {
+        public:
+            GameComponentCollection();
+        };
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // GAMECOMPONENTCOLLECTION_H

@@ -4,16 +4,16 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-struct Matrix
-{
-    Matrix();
-};
+        struct Matrix
+        {
+            Matrix();
+        };
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // MATRIX_H

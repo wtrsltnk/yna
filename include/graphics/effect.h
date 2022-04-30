@@ -4,22 +4,22 @@
 namespace yna
 {
 
-namespace framework
-{
+    namespace framework
+    {
 
-namespace graphics
-{
+        namespace graphics
+        {
 
-class Effect
-{
-public:
-    Effect();
-};
+            class Effect
+            {
+            public:
+                Effect();
+            };
 
-}
+        } // namespace graphics
 
-}
+    } // namespace framework
 
-}
+} // namespace yna
 
 #endif // EFFECT_H
