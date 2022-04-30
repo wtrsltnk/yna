@@ -56,3 +56,15 @@ TEST_CASE("Vec4 operators")
     d /= yna::framework::Vector4(3.0f);
     REQUIRE(d.X == (2.0f / 3.0f));
 }
+
+TEST_CASE("Vec4 add")
+{
+    yna::framework::Vector4 v1(10.0f, 4.0f, 7.0f, 2.0f);
+    yna::framework::Vector4 v2(1.0f, 9.0f, 11.0f, 9.0f);
+
+    auto r = yna::framework::Vector4::Add(v1, v2);
+    REQUIRE(r.X == 11.0f);
+    REQUIRE(r.Y == 13.0f);
+    REQUIRE(r.Z == 18.0f);
+    REQUIRE(r.W == 11.0f);
+}
